@@ -1,12 +1,13 @@
 require 'spec_helper'
-require 'moiety'
+require 'pair_partner'
 
-describe Moiety do
+describe PairPartner do
 
-  let(:a){ Moiety.new }
-  let(:b){ Moiety.new }
-  let(:c){ Moiety.new }
-  let(:d){ Moiety.new }
+  let(:a){ PairPartner.new }
+  let(:b){ PairPartner.new }
+  let(:c){ PairPartner.new }
+  let(:d){ PairPartner.new }
+  let(:e){ PairPartner.new }
 
   it 'can be paired' do
     pairs = []
@@ -18,14 +19,15 @@ describe Moiety do
   end
 
   context 'pairing a cohort' do
-    let(:cohort){ [a, b, c, d]}
-    #let(:student_a){ double :student, id: 1}
-    #let(:student_b){ double :student, id: 2}
-    #let(:student_c){ double :student, id: 3}
-    #let(:student_d){ double :student, id: 4}
 
     it 'generates pairs' do
-      expect(Moiety.generate_pairs(cohort)).to eq([[a,b],[c,d]])
+      cohort = [a, b, c, d]
+      expect(PairPartner.generate_pairs(cohort)).to eq([[a,b],[c,d]])
+    end
+
+    it 'generates a triple' do
+      uneven_cohort = [a, b, c, d, e]
+      expect(PairPartner.generate_pairs(uneven_cohort)).to eq([[a,b,e],[c,d]])
     end
   end
 
